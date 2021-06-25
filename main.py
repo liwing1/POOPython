@@ -10,7 +10,7 @@ kbdInput = ''
 def kbdListener():
     global kbdInput, finished
     while(True):
-        kbdInput = raw_input().lower()
+        kbdInput = str(input()).lower()
         os.system("clear")
         print(kbdInput)
 
