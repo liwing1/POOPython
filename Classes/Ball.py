@@ -35,13 +35,13 @@ class Ball(object):
         self.field = field
         self.field[y_position][x_position] = self
 
-        def __repr__(self):
-            """Overloads the default return on print funcion to print an O.
+    def __repr__(self):
+        """Overloads the default return on print funcion to print an O.
 
-            Returns:
-                str: Blue painted O string
-            """        
-            return bcolors.HEADER + "O" + bcolors.ENDC
+        Returns:
+            str: Blue painted O string
+        """        
+        return bcolors.HEADER + "O" + bcolors.ENDC
 
     def get_positions(self):
         return (self.x_position, self.y_position)
@@ -61,9 +61,9 @@ class Ball(object):
             next_x_position = self.field.width - 1
         if(next_y_position >= self.field.height):
             next_y_position = self.field.height - 1
-        if(next_x_position > 0):
+        if(next_x_position < 0):
             next_x_position = 0
-        if(next_y_position > 0):
+        if(next_y_position < 0):
             next_y_position = 0
 
         #checks if the place that the ball would move is occuped by a grass tile
@@ -78,5 +78,5 @@ class Ball(object):
             self.y_position = next_y_position
 
         #de-accelerate the balls
-        self.x_speed = max(0, self.x_speed - 1)
-        self.y_speed = max(0, self.y_speed - 1)
+        self.x_speed = max(0, self.x_speed - 1) if self.x_speed > 0 else min(0, self.x_speed + 1)
+        self.y_speed = max(0, self.y_speed - 1) if self.y_speed > 0 else min(0, self.y_speed + 1)

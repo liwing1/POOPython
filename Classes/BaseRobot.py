@@ -1,3 +1,4 @@
+from Classes.Ball import Ball
 from abc import ABCMeta, abstractmethod
 from Classes.Field import Grass
 
@@ -25,7 +26,7 @@ class BaseRobot(object):
         self.field.add_robot(self)
 
     def __repr__(self):
-        return bcolors.FAIL + "R" + bcolors.ENDC
+        return bcolors.OKBLUE + "R" + bcolors.ENDC
 
     def walk_right(self):
         next_x = self.x_position + 1
@@ -35,6 +36,9 @@ class BaseRobot(object):
                 self.field[self.y_position][self.x_position] = self.field[self.y_position][next_x]
                 self.field[self.y_position][next_x] = self
                 self.x_position += 1
+
+            elif(isinstance(self.field[self.y_position][next_x], Ball)):
+                self.kick_ball(1)
 
 
     def walk_left(self):
@@ -46,6 +50,9 @@ class BaseRobot(object):
                 self.field[self.y_position][next_x] = self
                 self.x_position -= 1
 
+            elif(isinstance(self.field[self.y_position][next_x], Ball)):
+                self.kick_ball(3)
+
 
     def walk_up(self):
         next_y = self.y_position - 1
@@ -56,6 +63,9 @@ class BaseRobot(object):
                 self.field[next_y][self.x_position] = self
                 self.y_position -= 1
 
+            elif(isinstance(self.field[next_y][self.x_position], Ball)):
+                self.kick_ball(4)
+
 
     def walk_down(self):
         next_y = self.y_position + 1
@@ -65,6 +75,9 @@ class BaseRobot(object):
                 self.field[self.y_position][self.x_position] = self.field[next_y][self.x_position]
                 self.field[next_y][self.x_position] = self
                 self.y_position += 1
+
+            elif(isinstance(self.field[next_y][self.x_position], Ball)):
+                self.kick_ball(2)
 
 
     @abstractmethod
@@ -77,10 +90,10 @@ class BaseRobot(object):
         """ Function for when the game is playing.
         """
     
-    # @abstractmethod
-    # def kick_ball(self, side):
-    #     """Function called when the robot wants to kick the ball.
+    @abstractmethod
+    def kick_ball(self, side):
+        """Function called when the robot wants to kick the ball.
 
-    #     Args:
-    #         side (int): int representing the side the robot wants to kick. 0 = right, 1 = down, 2 = left, 3 = up.
-    #     """        
+        Args:
+            side (int): int representing the side the robot wants to kick. 0 = right, 1 = down, 2 = left, 3 = up.
+        """        

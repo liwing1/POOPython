@@ -92,11 +92,11 @@ class Field(object):
                 print(column, end=" ")
             print("")
 
-    def game_playing(self):
+    def game_playing(self, i):
         """Main function called on main, every tick.
         """
         for robot in self.robots:
-            robot.game_playing()        
+            robot.game_playing(i)        
         self.ball.roll()
         self.print_field()
     
