@@ -36,12 +36,12 @@ class Ball(object):
         self.field[y_position][x_position] = self
 
         def __repr__(self):
-        """Overloads the default return on print funcion to print an O.
+            """Overloads the default return on print funcion to print an O.
 
-        Returns:
-            str: Blue painted O string
-        """        
-        return bcolors.HEADER + "O" + bcolors.ENDC
+            Returns:
+                str: Blue painted O string
+            """        
+            return bcolors.HEADER + "O" + bcolors.ENDC
 
     def get_positions(self):
         return (self.x_position, self.y_position)
